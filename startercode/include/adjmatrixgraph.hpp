@@ -2,13 +2,17 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include "Graph.hpp"
+#include <map>
+#include <stack>
+#include <queue>
+#include <functional>
+#include "graph.hpp"
 
 template <class N>
 class AdjMatrixGraph: public Graph<N>  {
 private:
 	std::vector<N> nodes;
-    const static int maxSize = 10;
+    const static int maxSize = 2048;
     short adjMatrix[maxSize][maxSize] = {};
     int numNodes = 0;
     int findNodeInMatrix(N x){
@@ -36,7 +40,7 @@ public:
 			numNodes++;
             nodes.push_back(*it);
         }
-        for (typename std::vector<pair<N,N>>::const_iterator it = newEdges.begin();
+        for (typename std::vector<std::pair<N,N>>::const_iterator it = newEdges.begin();
              it < newEdges.end();
              ++it)
         {

@@ -27,7 +27,7 @@ public:
     
     // Don't forget to overload the assignment operator
     AdjListGraph& operator= (const AdjListGraph &source) {
-        vertexMap = source->vertexMap;
+        vertexMap = source.vertexMap;
         return *this;
     }
     

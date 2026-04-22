@@ -61,17 +61,16 @@ public:
     virtual ~AdjMatrixGraph() = default;
     
     virtual bool adjacent(N x, N y)
-    {
-        bool result = false;
-        int xIndex = findNodeInMatrix(x);
-        int yIndex = findNodeInMatrix(y);
-        if ((xIndex != -1) && (yIndex != -1))
-        {
-            short xy = adjMatrix[xIndex][yIndex];
-            if (xy == 1) {result = true; };
-        }
-        return(result);
+{
+    int xIndex = findNodeInMatrix(x);
+    int yIndex = findNodeInMatrix(y);
+
+    if (xIndex == -1 || yIndex == -1) {
+        return false;
     }
+
+    return adjMatrix[xIndex][yIndex] > 0;
+}
 
     virtual std::vector<N>  neighbors(N x)
     {
@@ -93,20 +92,28 @@ public:
         numNodes++;
 
     }
-    virtual void addEdge(N x, N y){
-        int xIndex = findNodeInMatrix(x);
-        int yIndex = findNodeInMatrix(y);
-        if ((xIndex != -1) && (yIndex != -1))
-        {
-            adjMatrix[xIndex][yIndex] = 1;
-        }
+    virtual void addEdge(N x, N y)
+{
+    int xIndex = findNodeInMatrix(x);
+    int yIndex = findNodeInMatrix(y);
+
+    if (xIndex == -1 || yIndex == -1) {
+        return;
     }
+
+    adjMatrix[xIndex][yIndex] = 1;
+}
     virtual void deleteEdge(N x, N y)
-    {
-        int xIndex = findNodeInMatrix(x);
-        int yIndex = findNodeInMatrix(y);
-        adjMatrix[xIndex][yIndex] = 0;
+{
+    int xIndex = findNodeInMatrix(x);
+    int yIndex = findNodeInMatrix(y);
+
+    if (xIndex == -1 || yIndex == -1) {
+        return;
     }
+
+    adjMatrix[xIndex][yIndex] = 0;
+}
 
     // Traversals
     void dfs(N startNode, std::function<void(N)> visit) {

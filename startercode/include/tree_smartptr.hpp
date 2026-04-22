@@ -94,6 +94,12 @@ public:
         return _root->_parent.expired();
     }
 
+    // Check if this is a leaf (no children)
+    bool isLeaf() const {
+        if (isEmpty()) return false;
+        return left().isEmpty() && right().isEmpty();
+    }
+
     template <typename Compare = std::less<T>>
     Tree insert(T x, Compare comp = std::less<T>()) const {
         if (isEmpty()) {
